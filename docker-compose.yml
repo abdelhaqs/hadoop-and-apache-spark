@@ -1,12 +1,13 @@
-version: '3'
-services:
-  pyspark-jupyter:
-    image: jupyter/pyspark-notebook
-    container_name: pyspark-jupyter-container
-    ports:
-      - "8888:8888"
-      - "4040:4040"    # Spark UI port
-    volumes:
-      - "./notebooks:/home/jovyan/work/notebooks"
-      - "./notebooks/datasets:/home/jovyan/work/notebooks/datasets"
+version: '3' 
+services: 
+  pyspark-jupyter: 
+    image: jupyter/pyspark-notebook 
+    container_name: pyspark-jupyter-container 
+    user: "${UID}:${GID}"  # Add this line
+    ports: 
+      - "8888:8888" 
+      - "4040:4040"
+    volumes: 
+      - "./notebooks:/home/jovyan/work/notebooks" 
+      - "./notebooks/datasets:/home/jovyan/work/notebooks/datasets" 
     command: start-notebook.sh --NotebookApp.token=''
